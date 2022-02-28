@@ -134,7 +134,7 @@ svg1.selectAll(".bar")
 
 // selects the "hard-coded-bar" div and appends it to 
 // the svg using the width, height, and viewBox attributes
-const svg1 = d3
+const svg2 = d3
   .select("#csv-bar")
   .append("svg")
   .attr("width", width-margin.left-margin.right)
@@ -142,11 +142,11 @@ const svg1 = d3
   .attr("viewBox", [0, 0, width, height]);
 
 // barchart data
-d3.csv("data/barchar.csv").then((data2) => {
-  console.log(data2)
+d3.csv("data/barchart.csv").then((data) => {
+  console.log(data)
 
   // selects the max y-value for the graph/plot
-  let maxY2 = d3.max(data2, function(d) { return d.score; });
+  let maxY2 = d3.max(data, function(d) { return d.score; });
 
   // creates a scale for the y-axis based off of the max y-value   
   let yScale2 = d3.scaleLinear()  
@@ -156,21 +156,21 @@ d3.csv("data/barchar.csv").then((data2) => {
 
   // creates the appropriate scale for data1 on teh x-axis
   let xScale2 = d3.scaleBand()
-  .domain(d3.range(data2.length))
+  .domain(d3.range(data.length))
   .range([margin.left, width - margin.right])
   .padding(0.1); 
 
-  // appends the y-axis element to svg1 
+  // appends the y-axis element to svg2 
   svg2.append("g")
   .attr("transform", `translate(${margin.left}, 0)`) 
   .call(d3.axisLeft(yScale2)) 
   .attr("font-size", '20px'); 
 
-  // appends the x-axis element to svg1
+  // appends the x-axis element to svg2
   svg2.append("g")
   .attr("transform", `translate(0,${height - margin.bottom})`) 
   .call(d3.axisBottom(xScale1) 
-          .tickFormat(i => data2[i].name))  
+          .tickFormat(i => data[i].name))  
   .attr("font-size", '20px'); 
 
 
@@ -211,7 +211,7 @@ const mouseleave2 = function(event, d) {
 }
   // places the rectangles onto the bar chart with the appropriate data
   svg2.selectAll(".bar") 
-  .data(data2) 
+  .data(data) 
   .enter()  
   .append("rect") 
     .attr("class", "bar") 
