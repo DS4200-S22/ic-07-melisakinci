@@ -150,7 +150,7 @@ d3.csv("data/barchart.csv").then((data) => {
 
   // creates a scale for the y-axis based off of the max y-value   
   let yScale2 = d3.scaleLinear()  
-  .domain([0,maxY1])
+  .domain([0,maxY2])
   .range([height-margin.bottom,margin.top]); 
 
 
